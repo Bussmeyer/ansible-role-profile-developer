@@ -12,3 +12,4 @@ galaxy_info:
     - system
 dependencies:
   - bussmeyer.profile-all
+  - roderik.superlumic-homebrew
