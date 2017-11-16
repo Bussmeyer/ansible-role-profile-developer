@@ -1,0 +1,7 @@
+---
+zsh_autosuggestions_bind_key: "^U"
+zsh_antigen_bundles_extras:
+  - composer
+  - git-flow
+  - nvm
+  - { name: osx, when: "{{ ansible_os_family == 'Darwin' }}" }

@@ -1,0 +1,68 @@
+---
+
+- name: install taps
+  homebrew_tap: tap={{item}} state=present
+  with_items:
+    - caskroom/versions
+    - codekitchen/dinghy
+- name: install cli applications for developers
+  homebrew: name={{item}} state=latest
+  with_items:
+    - coreutils
+    - docker
+    - docker-compose
+    - docker-machine
+    - docker-machine-driver-xhyve
+    - dinghy
+    - findutils
+    - fzf
+    - git
+    - git-extras
+    - htop
+    - moreutils
+    - nvm
+    - python
+    - rsync
+    - sqlmap
+    - wget
+    - zsh
+    - zsh-completions
+#- shell: chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+#  become: yes
+#- shell: chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+#  become: yes
+- name: install applications for developers
+  homebrew_cask: name={{item}} state=present install_options=force
+  with_items:
+    - dash
+    - docker
+    - kitematic
+    - imagealpha
+    - imageoptim
+    - macdown
+    - phpstorm
+    - postman
+    - sequel-pro
+    - sourcetree
+    - virtualbox
+    - wireshark
+- name: create /usr/local/powerline directory
+  file: path=/usr/local/powerline state=directory
+  tags:
+    - powerline
+- name: git clone Powerline fonts repository
+  git: repo='https://github.com/powerline/fonts.git' dest=/usr/local/powerline/fonts
+  tags:
+    - powerline
+- name: install Powerline fonts
+  command: ./install.sh
+  args:
+    chdir: /usr/local/powerline/fonts/
+  tags:
+    - powerline
+- name: cleanup Powerline fonts installation
+  file: path=/usr/local/powerline/fonts state=absent
+  tags:
+    - powerline
+- name: create ~/Projects directory
+  file: path=~/Projects state=directory
