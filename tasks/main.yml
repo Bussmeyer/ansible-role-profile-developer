@@ -22,6 +22,7 @@
     - moreutils
     - nvm
     - python
+    - rbenv
     - rsync
     - sqlmap
     - wget
