@@ -67,3 +67,9 @@
     - powerline
 - name: create ~/Projects directory
   file: path=~/Projects state=directory
+- name: .zshrc.local
+  template:
+    src: templates/zshrc.local
+    dest: ~/.zshrc.local
+  tags:
+    - dotfiles
